@@ -50,18 +50,91 @@
           {
             "name": "id",
             "in": "path",
-            "required": true
+            "required": true,
+            "description": "User ID"
           },
           {
-            "name": "filtro",
+            "name": "filter",
+            "description": "A filter",
+            "type": "string",
             "in": "query"
           }
         ],
         "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "User found."
+          },
           "404": {
             "description": "Not Found"
           }
         }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to add a user.",
+        "parameters": [
+          {
+            "name": "newUser",
+            "in": "body",
+            "description": "User info",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/AddUser"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User added successfully!"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/forcedEndpoint/{id}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint forçado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do Usuário"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Informações do usuário",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/AddUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     }
   },
