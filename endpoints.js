@@ -39,3 +39,32 @@ module.exports = function (app) {
 		return res.status(500)    // #swagger.responses[500]
 	})
 }
+
+function myFunction(params) {
+    // #swagger.start
+ 
+    /*
+       #swagger.path = '/forcedEndpoint/{id}'
+       #swagger.method = 'put'
+       #swagger.description = 'Endpoint forçado'
+       #swagger.produces = ["application/json"]
+       #swagger.tags = ['User']
+    */
+ 
+    /* #swagger.parameters['id'] = { in: 'path', description: 'User ID' } */
+    const dataId = users.getUser(req.params.id)
+ 
+    /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'User info',
+           type: 'object',
+           schema: { $ref: "#/definitions/AddUser" }
+    } */
+    const dataObj = req.body
+ 
+    if (true)
+        return res.status(200).send(true)   // #swagger.responses[200]
+    return res.status(404).send(false)      // #swagger.responses[404]
+ 
+    // #swagger.end
+}
